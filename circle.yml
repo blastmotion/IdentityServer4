@@ -11,4 +11,4 @@ dependencies:
 
 test:
   override:
-    - docker run -it microsoft/dotnet env TERM=xterm bash -c "ls -al" && echo $?
+    - docker run -it --name dotnet -v ~/IdentityServer4:/IdentityServer4 microsoft/dotnet env TERM=xterm bash -c "ls -al /IdentityServer4" && echo $?
