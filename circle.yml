@@ -3,6 +3,8 @@ machine:
     - docker
 
 dependencies:
+  pre:
+    - mkdir ~/docker
   cache_directories:
     - "~/docker"
   override:
@@ -11,4 +13,4 @@ dependencies:
 
 test:
   override:
-    - docker run -it --name dotnet -v ~/IdentityServer4:/IdentityServer4 microsoft/dotnet env TERM=xterm bash -c "ls -al /IdentityServer4" && echo $?
+    - docker run -it --name dotnet -v ~/IdentityServer4:/IdentityServer4 microsoft/dotnet env TERM=xterm bash -c "/IdentityServer4/build.sh" && echo $?
