@@ -16,7 +16,7 @@ dependencies:
 
 test:
   override:
-    # - docker run -it --name dotnet -v ~/IdentityServer4:/IdentityServer4 microsoft/dotnet env TERM=xterm bash -c "cd /IdentityServer4/" && dotnet run && echo $?
-    - cd ~/IdentityServer4
-    - docker build -t IdentityServer4 .
-    - docker run IdentityServer4
+    - docker run -it --name dotnet -v ~/IdentityServer4:/IdentityServer4 microsoft/dotnet env TERM=xterm bash -c "/IdentityServer4/dotnet.sh" && echo $?
+    # - cd ~/IdentityServer4
+    # - docker build -t IdentityServer4 .
+    # - docker run IdentityServer4
