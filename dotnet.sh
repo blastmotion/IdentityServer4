@@ -5,5 +5,5 @@ dotnet --info
 dotnet restore
 dotnet test ./test/IdentityServer.IntegrationTests/IdentityServer.IntegrationTests.csproj
 dotnet test ./test/IdentityServer.UnitTests/IdentityServer.UnitTests.csproj
-dotnet run --proejct ./src/IdentityServer4/IdentityServer4.csproj
+dotnet run --project ./src/IdentityServer4/IdentityServer4.csproj
 exit
