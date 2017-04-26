@@ -11,4 +11,6 @@ dependencies:
 
 test:
   override:
-    - docker run -it microsoft/dotnet env TERM=xterm bash -c "./build.sh" && echo $?
+    - pwd
+    - ls -al
+    - docker run -it microsoft/dotnet env TERM=xterm bash -c "/home/ubuntu/IdentityServer4/build.sh" && echo $?
