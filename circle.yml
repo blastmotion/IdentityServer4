@@ -5,8 +5,8 @@ machine:
 dependencies:
   pre:
     # - [[ -d ~/docker ]] || mkdir ~/docker
-    - sudo apt-get update
-    - sudo apt-get install mono-complete
+    # - sudo apt-get update
+    # - sudo apt-get install mono-complete
 
   cache_directories:
     - "~/docker"
@@ -16,4 +16,7 @@ dependencies:
 
 test:
   override:
-    - docker run -it --name dotnet -v ~/IdentityServer4:/IdentityServer4 microsoft/dotnet env TERM=xterm bash -c "cd /IdentityServer4/" && dotnet run && echo $?
+    # - docker run -it --name dotnet -v ~/IdentityServer4:/IdentityServer4 microsoft/dotnet env TERM=xterm bash -c "cd /IdentityServer4/" && dotnet run && echo $?
+    - cd ~/IdentityServer4
+    - docker build -t IdentityServer4 .
+    - docker run IdentityServer4
