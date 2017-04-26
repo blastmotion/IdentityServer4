@@ -1,0 +1,14 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  cache_directories:
+    - "~/docker"
+  override:
+    - docker info
+    - docker pull microsoft/dotnet
+
+test:
+  override:
+    - docker run -it microsoft/dotnet env TERM=xterm bash -c "./build.sh" && echo $?
