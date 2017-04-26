@@ -4,7 +4,7 @@ machine:
 
 dependencies:
   pre:
-    - [[ -d ~/docker ]] || mkdir ~/docker
+    # - [[ -d ~/docker ]] || mkdir ~/docker
     - sudo apt-get update
     - sudo apt-get install mono-complete
 
