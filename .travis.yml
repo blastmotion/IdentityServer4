@@ -3,6 +3,10 @@ sudo: required
 services:
   - docker
 
+branches:
+  only:
+    - dev
+
 before_install:
   - docker pull nginx
 
@@ -11,7 +15,7 @@ script:
   - docker run -d -p 8080:80 --name nginx-updated $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/nginx-updated-travis:$TRAVIS_COMMIT 
   - curl localhost:8080
 
-deploy:
+after_success:
   - pip install awscli
   - $(aws ecr --region us-west-2 get-login)
   - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/nginx-updated-travis:$TRAVIS_COMMIT
