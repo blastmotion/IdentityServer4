@@ -3,15 +3,11 @@ machine:
     - docker
 
 dependencies:
-  pre:
-    # - [[ -d ~/docker ]] || mkdir ~/docker
-
-  cache_directories:
-    - "~/docker"
   override:
     - docker info
-    - docker pull microsoft/dotnet
+    - docker pull nginx
 
 test:
   override:
-    - docker run -it --name IdentityServer4 -v ~/IdentityServer4:/IdentityServer4 microsoft/dotnet env TERM=xterm bash -c "/IdentityServer4/dotnet.sh" && echo $?
+    - docker run -d -p 8080:80 nginx & sleep 20; 
+    - curl localhost:8080 
