@@ -3,18 +3,22 @@ machine:
     - docker
 
 dependencies:
-  override:
-    - docker info
-  post: 
+  pre:
+    - docker info 
     - docker pull nginx
+  
+compile:
+  override:
     - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/nginx-updated:$CIRCLE_SHA1 .
+
 test:
-  dev: docker run -d -p 8080:80 --name nginx-updated $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/nginx-updated:$CIRCLE_SHA1; sleep 10
+  override:
+    - docker run -d -p 8080:80 --name nginx-updated $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/nginx-updated:$CIRCLE_SHA1; sleep 10
     - curl localhost:8080 
+
 deployment: 
-  dev:
-    branch: dev
-    commands:
-      - pip install awscli
-      - $(aws ecr --region us-west-2 get-login)
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/nginx-updated:$CIRCLE_SHA1 
+  branch: dev
+  commands:
+    - pip install awscli
+    - $(aws ecr --region us-west-2 get-login)
+    - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/nginx-updated:$CIRCLE_SHA1 
